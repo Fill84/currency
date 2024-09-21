@@ -6,8 +6,8 @@
 Currency is a simple PHP library for current and historical currency exchange rates & crypto exchange rates. based on the free API [exchangerate.host](https://exchangerate.host "exchangerate.host Homepage") - no API keys needed!
 
 ## Requirements
-- PHP >= 7.2
-- guzzlehttp >= 6.0
+- PHP >= 8.2
+- guzzlehttp >= 7.0
 
 ## Installation
 
