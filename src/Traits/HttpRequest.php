@@ -47,7 +47,7 @@ trait HttpRequest
             $this->initClient();
 
             $this->response = $this->client->request($method, $url, [
-                'query'=> $params
+                'query' => $params
             ]);
 
             if ($this->failed()) {
@@ -58,12 +58,23 @@ trait HttpRequest
                 $this->response->getBody()->getContents()
             );
 
+            if (isset($response->rates)) {
+                $response = (object)[
+                    "success" => true,
+                    "query" => (object)[
+                        "from" => $params['from'],
+                        "to" => $params['to'],
+                        "amount" => $params['amount'],
+                    ],
+                    "result" => $response->rates->{$params['to']},
+                ];
+            }
+
             if (empty($response->success) || $response->success === false) {
                 throw new RequestException($this->response);
             }
 
             return $response;
-
         } catch (\Exception $e) {
             if ($this->throw) {
                 if ($this->throw_callback && is_callable($this->throw_callback)) {
@@ -134,5 +145,4 @@ trait HttpRequest
     {
         return $this->response->getStatusCode() >= 400;
     }
-
 }

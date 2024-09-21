@@ -17,7 +17,7 @@ class CurrencyConversion extends API
     /**
      * @var string
      */
-    protected $base_url  = 'https://api.exchangerate.host/convert';
+    protected $base_url  = 'https://api.frankfurter.app/latest';
 
     /**
      * Required base currency
